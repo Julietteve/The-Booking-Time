@@ -1,0 +1,99 @@
+
+html,
+body {
+    background-color: #fef9e7;
+    margin: 0px;
+    padding: 0px;
+}
+
+:root {
+    --title: 'Arial';
+    --text: 'Lucida Sans';
+}
+
+/*Hotel*/
+
+.hotelContainer{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.cardContainer {
+    flex-wrap: wrap;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border: lightgrey 1px solid;
+    margin: 2%;
+}
+
+.cover {
+    width: 20vw;
+}
+
+.name {
+    font-family: var(--title);
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.cardHolder {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+
+.icon {
+    margin-right: 10px;
+    font-size: 0.8em;
+}
+
+.icon-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    font-family: var(--text);
+    font-weight: bold;
+}
+
+.location {
+    font-family: var(--text);
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.description {
+    font-family: var(--text);
+    text-align: justify;
+}
+
+.bookButton {
+    width: 100%;
+    height: 30px;
+    font-family: var(--text);
+    text-transform: uppercase;
+    border: maroon 1px solid;
+    text-align: center;
+}
+
+
+.header{
+    font-family: var(--title);
+    text-align: center;
+}
+.filter{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    display: flex;
+    justify-content: space-around;
+    border: lightgray 1px solid;
+}
+.filter input, select{
+    font-family: var(--text);
+}
