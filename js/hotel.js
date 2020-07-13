@@ -3,28 +3,33 @@ const getDollars = price =>
         i className = { "fas fa-dollar-sign icon" }
         key = { `dollar-${index}` }
         style = {
-            { color: index < price ? "#9E4464" : "lightgrey" } }
+            { color: index < price ? "#580000" : "#767674" } }
         />
     ));
 
 const Hotel = (props) => {
-    return (    
-        <div className = "cardContainer">
-        <img className = "cover"src = { props.photo} alt = {props.slug}/>
-        <div className = "cardHolder">
-        <h1 className = "name"> { props.name } </h1> 
-        <div className = "location" >
-        <p><i className = "fas fa-map-marker-alt icon" ></i>{props.location}</p >
-        </div> 
-        <p className = "description"> { props.description }</p>
-        <div className = "icon-info">
-        <div className = "size" >
-        <p> <i className = "fas fa-bed icon "> </i>{`${props.beds} habitaciones`}</p >
-        </div><span>{ getDollars(props.price)}</span> 
-        </div> 
-        <button className = "bookButton" > Reservar </button> 
-        </div>
-        </div> 
+    const {photo,slug,name,location,description,beds,price}= props
+
+    return ( 
+                    <div className = "hotel">
+                        <img className = "img-fluid cover"src = {photo} alt = {slug}/>
+                        <div className = "hotel-holder">
+                            <h1 className = "name"> { name } </h1> 
+                            <div className = "location" >
+                                <p><i className = "fas fa-map-marker-alt icon" ></i>{location}</p >
+                            </div> 
+                            <p className = "description"> {description}</p>
+                            </div>
+                            <div className = "icon-info">
+                                <div className = "size" >
+                                    <p> <i className = "fas fa-bed icon "> </i>{`${beds} habitaciones`}</p >
+                                </div>
+                                    <span>{ getDollars(price)}</span> 
+                            </div> 
+                            <div className="bottom">
+                            <button className = "bookButton" > Reservar </button> 
+                            </div>
+                        </div>
     )
 }
 export default Hotel;

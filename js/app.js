@@ -1,107 +1,101 @@
-import Hotel from "./hotel"
+import HotelContainer from "./hotelContainer"
 import Filter from "./filter"
 import Header from "./header"
 import {hotelsData} from "./data.js"
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dateIn: moment().format('LL'), 
-            dateOut: moment().format('LL'),
-            hotel : [],
-        };
-    
-        this.handleDate = this.handleDate.bind(this);
-        this.handleCountry = this.handleCountry.bind(this);
-        this.handlePrice = this.handlePrice.bind(this);
-        this.handleRooms = this.handleRooms.bind(this);
+    state = {
+            availabilityFrom:"",
+            availabilityTo:"",
+            hotel: [],
+            filteredHotels: [],
+            filterBy: {
+                country: "Todos los países",
+                price: "Cualquier precio",
+                room: "Cualquier tamaño"
+            }
+        }
+
+    componentDidMount() {
+        this.setState({availabilityFrom:"fecha de entrada"})
+        this.setState({availabilityTo:"fecha de salida"})
+        this.setState({hotel: hotelsData})
+        this.setState({filteredHotels: hotelsData})
+        console.log("mounted")
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.filterBy !== prevState.filterBy) {
+          this.setState({ 
+              filteredHotels: this.handleFilters()
+            })
+        }
       }
 
-    componentDidMount(){
-        this.setState({hotel:hotelsData})
-    }
+    handleFilterInputs = (inputValue,inputName) => {
+       this.setState({
+           filterBy :{...this.state.filterBy, [inputName]: inputValue}
+        })
+    };
 
-    handleDate(e){
-           const date = moment(e.target.value).format('LL');;
-           this.setState({[e.target.name]: date})
-    }
+    handleFilterInputsDates = (inputValue,inputName) => {
+        const date = moment(inputValue).format('dddd LL');
+        this.setState({ 
+            [inputName]: date
+         })
+     };
 
-    handleCountry(e){
-        const target = e.target.value
-        const filterByCountry = hotelsData.filter(hotel =>(
-            hotel.country === target
-        ))
-        target === "Todos los países" ? this.setState({hotel:hotelsData}):
-        this.setState( { hotel: filterByCountry})
-    }
+    handleFilters =()=> { 
+        const filterByCountry = this.state.hotel.filter(hotel =>
+        {
+            if(this.state.filterBy.country === "Todos los países"){
+                return hotel;
+            }
+             return (hotel.country === this.state.filterBy.country)
+            });
 
-    handlePrice(e){
-        const target = e.target.value.length
-        const filterByPrice = hotelsData.filter(hotel =>(
-            hotel.price ===  target
-        ))
-        e.target.value === "Cualquier precio"? this.setState({hotel:hotelsData}): 
-        this.setState({hotel: filterByPrice})
-    }
-
-    handleRooms(e){
-        const target = e.target.value
-        const hotelesPequeños = hotelsData.filter(hotel=>hotel.rooms<=10)
-        const hotelesMedianos = hotelsData.filter(hotel=>hotel.rooms>=10 && hotel.rooms<=20)
-        const hotelesGrandes = hotelsData.filter(hotel =>(hotel.rooms>=20)) 
-        if( target === "Hotel pequeño"){
-            this.setState({hotel : hotelesPequeños})
-        } else if ( target === "Hotel mediano"){
-            this.setState({hotel : hotelesMedianos})
-        } else if ( target === "Hotel grande"){
-            this.setState({ hotel: hotelesGrandes})
-        } else{
-            this.setState({ hotel:hotelsData})
+        const filterByPrice = filterByCountry.filter(hotel => {
+            if( this.state.filterBy.price === "Cualquier precio"){
+                return hotel;
+            }
+            return (hotel.price === this.state.filterBy.price.length)
+            });
+       
+        const filterByRooms = filterByPrice.filter(hotel =>{
+            if ( this.state.filterBy.room === "Hotel pequeño") {
+                return hotel.rooms <= 10;
+            } else if (this.state.filterBy.room === "Hotel mediano") {
+                return hotel.rooms >= 10 && hotel.rooms <= 20;
+            } else if (this.state.filterBy.room === "Hotel grande") {
+                return hotel.rooms >= 20;
+            } else if (this.state.filterBy.room === "Cualquier tamaño") {
+                return hotel;
+            } 
+            });
+                    return filterByRooms
         }
-    }
 
-    render(){
-        const {hotel,dateIn,dateOut}= this.state
-        return(
+    render() {
+        const {availabilityFrom, availabilityTo,filteredHotels} = this.state
+        return (
             <div>
-               <Header dateIn={dateIn} dateOut={dateOut}/>
-               <Filter
-               onChangeIn={this.handleDate}
-               dateIn= "dateIn"
-               valueIn= {dateIn}
-               minIn= {dateIn}
-               dateOut="dateOut"
-               onChangeOut={this.handleDate}
-               valueOut={dateOut}
-               minOut={dateIn}
-
-               onChangeCountry= {this.handleCountry}
-               valueCountry= {this.state.hotel.country}
-
-               onChangePrice = {this.handlePrice}
-               valuePrice={this.state.hotel.price}
-
-               onChangeRooms = {this.handleRooms}
-               valueRooms={this.state.hotel.rooms}
-
-               />
-               <div className="hotelContainer">
-               { hotel.map((hotel,index) =>(
-                <Hotel
-                key={index}
-                photo={hotel.photo}
-                slug={hotel.slug}
-                name= {hotel.name}
-                location ={`${hotel.city}, ${hotel.country}`}
-                description ={hotel.description}
-                beds={hotel.rooms}
-                price={hotel.price}
-            />
-               ))}
-               </div>
-               </div>
-
+                <div className="header-filter">
+                <Header 
+                dateIn={availabilityFrom}
+                dateOut={availabilityTo}
+                />
+                <Filter 
+                handleDateIn= {this.handleFilterInputsDates}
+                handleDateOut= {this.handleFilterInputsDates}
+                handleCountry= {this.handleFilterInputs}
+                handlePrice= {this.handleFilterInputs}
+                handleRooms= {this.handleFilterInputs}
+                />
+            </div>
+                <HotelContainer 
+                filteredHotels={filteredHotels}
+                />
+            </div>
         )
     }
 }

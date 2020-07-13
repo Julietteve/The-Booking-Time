@@ -1,90 +1,186 @@
-
 html,
 body {
-    background-color: #fef9e7;
     margin: 0px;
     padding: 0px;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 :root {
-    --title: 'Arial';
-    --text: 'Lucida Sans';
+    --title: 'Varela Round', sans-serif;
+    --text:  'Varela', sans-serif;
+    --wine: #580000;
+    --dust: #353336;
+    --mazona: #767674;
+    --grayland :#E0DBDA;
 }
 
 /*Hotel*/
 
-.hotelContainer{
+.hotels{
+    padding-top: 5%;
     display: flex;
     flex-wrap: wrap;
-
+    justify-content: center;
+}
+.hotel{
+    max-width: 20vw;
+    height: 95vh;
+    display: flex;
+    flex-direction:column;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 26px 26px 26px 26px;
+    -moz-border-radius: 26px 26px 26px 26px;
+    -webkit-border-radius: 26px 26px 26px 26px;
+    border: 0px solid #000000;
+    background-color: white;
+    margin: 2%;
+    position: relative;
 }
 
-.cardContainer {
-    flex-wrap: wrap;
-    width: 20vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    border: lightgrey 1px solid;
-    margin: 2%;
+.hotel:hover{
+    box-shadow: 3px 3px 3px 2px rgba(0, 0, 0, 0.2);
 }
 
 .cover {
-    width: 20vw;
+    border-radius: 5% 5% 0 0;
 }
 
 .name {
+    padding-top: 10%;
+    line-height: 20px;
     font-family: var(--title);
-    font-size: 1.5em;
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2em;
     text-align: center;
+    color: var(--wine)
 }
 
-.cardHolder {
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 5%;
+.hotel-holder {
+    padding-left: 8%;
+    padding-right: 8%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .icon {
     margin-right: 10px;
     font-size: 0.8em;
+    color: var(--dust);
 }
 
 .icon-info {
+    padding-left: 8%;
+    padding-right: 8%;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-around;
     font-family: var(--text);
     font-weight: bold;
+    font-size: 0.9em;
+    color: var(--dust);
+    margin-bottom: 50px;
 }
 
 .location {
+    text-align: center;
     font-family: var(--text);
-    font-size: 1.1em;
+    font-size: 0.9em;
     font-weight: bold;
+    color: var(--dust)
 }
 
 .description {
     font-family: var(--text);
     text-align: justify;
+    font-size: 0.7em;
+    color: var(--mazona);
+
 }
 
 .bookButton {
-    width: 100%;
-    height: 30px;
+    width: 90%;
+    border:0px;
     font-family: var(--text);
-    text-transform: uppercase;
-    border: maroon 1px solid;
     text-align: center;
+    font-weight: bold;
+    color: var(--dust);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    transition: all .2s ease-in-out; 
 }
 
+.bookButton:hover { 
+    transform: scale(1.1); 
+}
+.bookButton:focus{
+    border: 0px;
+    outline: 0px;
+}
+.bottom{
+    display: flex;
+    justify-content: center;
+    border-radius: 5%;
+    width: 20vw;
+    height: 50px;
+    position: absolute;
+    bottom: 20px;
+}
 
+.not-found{
+    color: var(--mazona);
+    padding: 10%;
+}
+
+/*Header*/
+.header-filter{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
 .header{
+    display: flex;
+    justify-content: center;
+    position: relative;
     font-family: var(--title);
     text-align: center;
 }
+
+.dates{
+    position: absolute;
+    top: 80%;
+    font-size: 1.2em;
+    color:white;
+    
+}
+.in-out-dates{
+    font-weight: bold;
+    color: white;
+}
+.title{
+    border: white 4px solid;
+    padding: 2%;
+    position: absolute;
+    text-transform: uppercase;
+    color: white;
+    font-size: 3em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.banner-img{
+    width: 100%;
+}
+
+/*Filter*/
+
 .filter{
     padding-left: 5%;
     padding-right: 5%;
@@ -92,8 +188,84 @@ body {
     padding-bottom: 1%;
     display: flex;
     justify-content: space-around;
-    border: lightgray 1px solid;
+    position: absolute;
+    bottom: -25px;
+    background-color:white;
+    border-radius: 32px 32px 32px 32px;
+    -moz-border-radius: 32px 32px 32px 32px;
+    -webkit-border-radius: 32px 32px 32px 32px;
+    border: 0px solid #000000;
+    width: 85%;
 }
 .filter input, select{
-    font-family: var(--text);
+    border:  0px;
 }
+
+.filter select,input:focus{
+    outline: 0px;
+}
+
+option:hover{
+    color: var(--dust);
+    box-shadow: 0 0 10px 100px var(--mazona) inset;
+    background-color: #767674;
+}
+
+.filter-module{
+    font-family: var(--text);
+    color: var(--mazona);
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+/*Responsive Breakpoints*/
+
+@media (max-width: 768px) { 
+    .title{
+        font-size: 1.2em;
+        border: white 2px solid;
+        padding: 1%;
+    }
+    .dates{
+        font-size: 0.8em;
+        top:70%;
+        
+    }
+    .filter{
+        width: 60%;
+        flex-direction: column;
+        bottom: -100px;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 0.9em;
+
+    }
+    .filter-module{
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+    }
+    .hotel{
+        max-width: 50vw;
+    }
+    .hotels{
+        padding-top: 25%;
+        flex-direction: column;
+        align-items: center;
+    }
+    .bottom{
+        display: flex;
+        align-items: center;
+        width: 100%;
+    } 
+    .bookButton {
+        height: 50px;
+    }
+ }
+

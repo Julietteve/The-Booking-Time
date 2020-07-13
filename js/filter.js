@@ -1,21 +1,67 @@
 const Filter =(props) =>{
-    const {onChangeIn, onChangeOut, dateIn, dateOut, valueIn,valueOut,minIn, minOut,onChangeCountry, valueCountry, onChangePrice, valuePrice, onChangeRooms, valueRooms} = props
-    const paises= [ "Todos los países","Argentina", "Uruguay", "Brasil", "Chile"]
-    const precios= ["Cualquier precio", "$", "$$", "$$$", "$$$$"]
+    const {handleDateIn, handleDateOut, handleCountry, handlePrice, handleRooms} = props
+    
+    const paises=[ "Todos los países","Argentina", "Uruguay", "Brasil", "Chile"]
+    const precios=["Cualquier precio", "$", "$$", "$$$", "$$$$"]
     const tamaños =["Cualquier tamaño", "Hotel pequeño", "Hotel mediano", "Hotel grande"]
+    
     return (
         <div className= "filter">
-            <input name= {dateIn} onChange={onChangeIn} value={valueIn} type="date" min={minIn}></input>
-            <input name= {dateOut} onChange={onChangeOut} value={valueOut} type="date" min={minOut}></input>
-            <select  onChange={onChangeCountry} > 
-               {paises.map( (pais,index,) =>(<option key={index}value ={valueCountry}>{pais}</option>))}
-            </select>
-            <select onChange={onChangePrice}> 
-               {precios.map((precio,index) =>(<option key={index} value={valuePrice}>{precio}</option>))}
-            </select>
-            <select onChange={onChangeRooms}> 
-               {tamaños.map( (tamaño,index) =>(<option key={index} value={valueRooms}>{tamaño}</option>))}
-            </select>
+            <div className="filter-module">
+                <i className="fas fa-sign-in-alt icon"></i>
+                    <input 
+                        name= "availabilityFrom"
+                        onChange={(e)=>handleDateIn(e.target.value, e.target.name)}
+                        type="date" 
+                    />
+            </div>
+            <div className="filter-module">
+                <i className="fas fa-sign-in-alt fa-rotate-180 icon"></i>
+                    <input 
+                        name= "availabilityTo" 
+                        onChange={(e)=>handleDateOut(e.target.value, e.target.name)}
+                        type="date"
+                    />
+            </div>
+            <div className="filter-module">
+                <i className = "fas fa-map-marker-alt icon" ></i>
+                    <select 
+                        name="country"
+                        onChange={(e)=>handleCountry(e.target.value, e.target.name)}> 
+                        {paises.map( (pais,index,) =>(
+                            <option
+                                key={index}
+                                value ={pais}>
+                                {pais}
+                            </option>))}
+                    </select>
+            </div>
+            <div className="filter-module">
+                <i className = " fas fa-dollar-sign icon"></i>
+                    <select  
+                        name= "price" 
+                        onChange={(e)=>handlePrice(e.target.value, e.target.name)}> 
+                        {precios.map((precio,index) =>(
+                            <option 
+                                key={index}
+                                value={precio}>
+                                {precio}
+                            </option>))}
+                    </select>
+            </div>
+            <div className="filter-module">
+                <i className = "fas fa-bed icon"> </i>
+                     <select 
+                        name="room" 
+                        onChange={(e)=>handleRooms(e.target.value, e.target.name)}> 
+                        {tamaños.map((tamaño,index) =>(
+                            <option 
+                                key={index} 
+                                value={tamaño}>
+                                {tamaño}
+                            </option>))}
+                    </select>
+            </div>
         </div>
     )
 }
