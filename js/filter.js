@@ -1,6 +1,6 @@
 const Filter =(props) =>{
-    const {handleDateIn, handleDateOut, handleCountry, handlePrice, handleRooms} = props
     
+    let {handleDateIn, handleDateOut, handleCountry, handlePrice, handleRooms} = props
     const paises=[ "Todos los países","Argentina", "Uruguay", "Brasil", "Chile"]
     const precios=["Cualquier precio", "$", "$$", "$$$", "$$$$"]
     const tamaños =["Cualquier tamaño", "Hotel pequeño", "Hotel mediano", "Hotel grande"]

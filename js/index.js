@@ -1,6 +1,5 @@
 import App from "./app"
 
-
 function Application() {
   return (
       <div>
