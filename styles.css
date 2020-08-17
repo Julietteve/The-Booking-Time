@@ -18,7 +18,7 @@ body {
 /*Hotel*/
 
 .hotels{
-    padding-top: 4%;
+    padding-top: 3%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -220,29 +220,26 @@ option:hover{
     background-color: var(--wine) !important;
     opacity: 0.7 !important;
 }
-
-/*Responsive Breakpoints*/
-
-@media (max-width: 576px) { 
-    .title{
-        font-size: 1em;
-        border: white 1px solid;
-    }
-    .hotels{
-        padding-top: 70%;
-        flex-direction: column;
-        align-items: center;
-    }
-
+.color-full{
+    color: var(--wine);
+    margin: 2px;
 }
+.color-empty{
+    color: var(--mazona);
+    margin: 2px;
+}
+
+/* Responsive on mobile and lg screen*/
+
 @media (max-width: 768px) { 
     .title{
-        font-size: 1.2em;
+        font-size: 1em;
         border: white 2px solid;
         padding: 1%;
     }
     .dates{
-        font-size: 0.8em;
+        padding: 1%;
+        font-size: 0.7em;
         top:70%;
         
     }
@@ -251,8 +248,8 @@ option:hover{
         width: 100%;
         display: flex;
         flex-direction: column;
-        bottom: -200px;
-        font-size: 0.9em;
+        bottom: -170px;
+        font-size: 0.8em;
         text-align: center;
 
     }
@@ -271,11 +268,11 @@ option:hover{
         border-bottom: 0px;
     }
     .hotel{
-        max-width: 50vw;
-        height: 100vh;
+        max-width: 70vw;
+        height: 80vh;
     }
     .hotels{
-        padding-top: 40%;
+        padding-top: 50%;
         flex-direction: column;
         align-items: center;
     }
@@ -286,6 +283,21 @@ option:hover{
     } 
     .bookButton {
         height: 50px;
+    }
+    .name{
+        font-size: 1em;
+    }
+    .location{
+        font-size: 0.7em;
+    }
+    .description{
+        font-size: 0.7em;
+    }
+    .icon-info{
+        font-size: 0.8em;
+    }
+    .bookButton{
+        font-size: 0.9em;
     }
  }
 

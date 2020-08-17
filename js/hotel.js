@@ -1,12 +1,14 @@
 
 const Hotel = (props) => {
+
     let {photo,slug,name,location,description,beds,price}= props
-    let getDollars =  Array.from(new Array(4), (n, index) => ( 
+    
+    const getDollars = dollar => ( 
+        Array.from(new Array(4), (n, index)=>
         <i 
-        className = { "fas fa-dollar-sign icon" }
-        key = { `dollar-${index}` }
-        style = {
-            { color: index < price ? "#820233" : "#767674" } }
+        key={`dollar-${index}`}
+        className={
+          index < dollar ? "fa fa-usd solid color-full" : "fa fa-usd empty color-empty"}
         />
     ));
 
@@ -22,9 +24,9 @@ const Hotel = (props) => {
                 </div>
                 <div className = "icon-info">
                     <div className = "size" >
-                        <p><i className = "fas fa-bed icon "> </i>{`${beds} habitaciones`}</p >
+                        <p><i className = "fa fa-bed icon"> </i>{`${beds} habitaciones`}</p >
                     </div>
-                    <span>{getDollars}</span> 
+                    <span>{getDollars(price)}</span> 
                 </div> 
                 <div className="bottom">
                     <button className = "bookButton" > Reservar </button> 

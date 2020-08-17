@@ -3,7 +3,7 @@ import App from "./app"
 function Application() {
   return (
       <div>
-       <App/>
+          <App/>
       </div>
   )
 }

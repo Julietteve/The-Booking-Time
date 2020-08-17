@@ -1,7 +1,9 @@
 import Hotel from "./hotel.js"
 
 const HotelContainer = (props)=>{
+
     let {filteredHotels}= props
+
     return(
             <div className="hotels">
                 {filteredHotels.length === 0 ? (<p className="not-found">No hay resultados para esta búsqueda</p>)
@@ -17,7 +19,7 @@ const HotelContainer = (props)=>{
                         price={hotel.price}
                     />
                     ))}
-                    </div>
+            </div>
     )
 }
 

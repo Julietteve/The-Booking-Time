@@ -1,5 +1,7 @@
 const Header =(props)=>{
-    let {dateIn, dateOut}= props
+
+    let {dateIn, dateOut} = props
+    
     return(
         <div className="header">
             <img className="banner-img" src="images/banner.jpg" alt="img"/>

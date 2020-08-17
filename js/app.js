@@ -5,6 +5,7 @@ import {hotelsData} from "./data.js"
 
 
 class App extends React.Component {
+    
     state = {
             availabilityFrom:"",
             availabilityTo:"",
@@ -35,6 +36,7 @@ class App extends React.Component {
       }
 
     handleFilterInputs = (inputValue,inputName) => {
+        console.log(inputValue,inputName)
        this.setState({
            filterBy :{...this.state.filterBy, [inputName]: inputValue}
         })
@@ -47,24 +49,63 @@ class App extends React.Component {
          })
      };
 
+     dateConvert = (date) =>{
+         return date.setHours(23),
+                date.setMinutes(59),
+                date.setSeconds(59),
+                date.valueOf()
+     }
+
     handleFilters = () => { 
+        
         let today = new Date().valueOf();
         let availabilityDatesIn = [];
         let availabilityDatesOut= [];
-        let availabilityFromToDate= new Date(this.state.filterBy.availabilityFrom.split("-").join(",")).valueOf();
-        let availabilityToToDate= new Date(this.state.filterBy.availabilityTo.split("-").join(",")).valueOf();
+        let availabilityFromToDate= new Date(this.state.filterBy.availabilityFrom.split("-").join(","));
+        this.dateConvert(availabilityFromToDate);
+        let availabilityToToDate= new Date(this.state.filterBy.availabilityTo.split("-").join(","));
+        this.dateConvert(availabilityToToDate);
+      
 
+        let filterByCountry = this.state.hotel.filter(hotel =>{
+            if(this.state.filterBy.country === "Todos los países"){
+                return hotel;
+            }
+            return (hotel.country === this.state.filterBy.country)
+            });
+
+        let filterByPrice = filterByCountry.filter(hotel => {
+            if( this.state.filterBy.price === "Cualquier precio"){
+                return hotel;
+            }
+            return (hotel.price=== this.state.filterBy.price.length)
+            });
+       
+        let filterByRooms = filterByPrice.filter(hotel =>{
+            if ( this.state.filterBy.room === "Hotel pequeño") {
+                return hotel.rooms <= 10;
+            } else if (this.state.filterBy.room === "Hotel mediano") {
+                return hotel.rooms >= 10 && hotel.rooms <= 20;
+            } else if (this.state.filterBy.room === "Hotel grande") {
+                return hotel.rooms >= 20;
+            } else if (this.state.filterBy.room === "Cualquier tamaño") {
+                return hotel;
+            } 
+            });
+        
+    // Para poder filtrar sobre los filtros select o data picker sin orden determinado, filtro por fechas al final. Al inicio de la funcion solo lograba hacer funcionar los filtros en orden, requiriendo el filtro por fecha haciendo dependiente al de pais, precio y tamaño.
+           
         if (availabilityFromToDate < today && availabilityFromToDate)
         {
             sweetAlert("¡Atención!",
             "La fecha de entrada debe ser posterior a la fecha actual", 
             "warning");
-            
-            return availabilityDatesIn
+    
+            return availabilityDatesIn;
         }
         else
         {
-            availabilityDatesIn = this.state.hotel.filter((hotel) => {
+            availabilityDatesIn = filterByRooms.filter((hotel) => {
                 return (
                     availabilityFromToDate >= hotel.availabilityFrom &&
                     availabilityFromToDate <= hotel.availabilityTo);
@@ -80,42 +121,14 @@ class App extends React.Component {
 
             return availabilityDatesOut
         }
-        else
+        else if (availabilityDatesIn.length)
         {
             availabilityDatesOut = availabilityDatesIn.filter(hotel =>{
             return availabilityToToDate <= hotel.availabilityTo;
             })
         }
 
-        let filterByCountry = this.state.hotel.filter(hotel =>{
-            if(this.state.filterBy.country === "Todos los países"){
-                return hotel;
-            }
-            return (hotel.country === this.state.filterBy.country)
-            });
-
-        let filterByPrice = filterByCountry.filter(hotel => {
-            if( this.state.filterBy.price === "Cualquier precio"){
-                return hotel;
-            }
-            return (hotel.price === this.state.filterBy.price.length)
-            });
-       
-        let filterByRooms = filterByPrice.filter(hotel =>{
-            if ( this.state.filterBy.room === "Hotel pequeño") {
-                return hotel.rooms <= 10;
-            } else if (this.state.filterBy.room === "Hotel mediano") {
-                return hotel.rooms >= 10 && hotel.rooms <= 20;
-            } else if (this.state.filterBy.room === "Hotel grande") {
-                return hotel.rooms >= 20;
-            } else if (this.state.filterBy.room === "Cualquier tamaño") {
-                return hotel;
-            } 
-            });
-        
-    // Para poder filtrar sobre los filtros select o data picker sin orden determinado, filtro por fechas al final. Al inicio de la funcion, solo lograba hacer funcionar los filtros en orden, requiriendo el filtro por fecha haciendo dependiente al de pais, precio y tamaño.
-
-            availabilityDatesOut = filterByRooms.filter((hotel) => {
+        availabilityDatesOut = filterByRooms.filter((hotel) => {
                 return ( availabilityToToDate >= hotel.availabilityFrom &&
                         availabilityToToDate <= hotel.availabilityTo);
             });
