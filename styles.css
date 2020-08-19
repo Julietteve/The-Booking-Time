@@ -2,7 +2,7 @@ html,
 body {
     margin: 0px;
     padding: 0px;
-    background-color: white;
+    background-color:white;
     box-sizing: border-box;
 }
 
@@ -16,6 +16,7 @@ body {
 }
 
 /*Hotel*/
+
 
 .hotels{
     padding-top: 3%;
@@ -231,30 +232,87 @@ option:hover{
 
 /* Responsive on mobile and lg screen*/
 
-@media (max-width: 768px) { 
+@media screen and (max-width: 992px) {
     .title{
-        font-size: 1em;
+        font-size: 1.5em;
+        top: 50%;
+    }
+    .dates{
+        padding: 1%;
+        font-size: 0.9em;
+        top: 70%;   
+    }
+    .filter{
+        padding-left: 1%;
+        padding-right: 1%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+        display: flex;
+        justify-content: space-around;
+        position: absolute;
+        bottom: -25px;
+        background-color:white;
+        border-radius: 32px 32px 32px 32px;
+        -moz-border-radius: 32px 32px 32px 32px;
+        -webkit-border-radius: 32px 32px 32px 32px;
+        border: 0px solid #000000;
+        width: 100%;
+    }
+    .filter-module{
+        font-family: var(--title);
+        color: var(--mazona);
+        font-size: 0.6em;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .hotels{
+        padding-top: 5%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hotel{
+        max-width: 30vw;
+        height: 90vh
+    }
+    .bottom{
+        display: flex;
+        align-items: center;
+        width: 100%;
+    } 
+    .bookButton {
+        height: 50px;
+    }
+
+}
+    @media screen and (max-width: 600px) {
+    .title{
+        top: 40%;
+        font-size: 1.2em;
         border: white 2px solid;
         padding: 1%;
     }
     .dates{
         padding: 1%;
-        font-size: 0.7em;
-        top:70%;
-        
+        font-size: 0.8em;
+        top: 60%;   
     }
     .filter{
         border-radius: 0px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        bottom: -170px;
-        font-size: 0.8em;
+        justify-content: center;
+        bottom: -120%;
         text-align: center;
-
-    }
+        }
     .filter-module{
         text-align: center;
+        font-size: 0.7em;
         width: 100%;
         padding-top: 2%;
         padding-bottom: 2%;
@@ -269,10 +327,10 @@ option:hover{
     }
     .hotel{
         max-width: 70vw;
-        height: 80vh;
+        height: 100vh;
     }
     .hotels{
-        padding-top: 50%;
+        padding-top: 40%;
         flex-direction: column;
         align-items: center;
     }
@@ -299,5 +357,5 @@ option:hover{
     .bookButton{
         font-size: 0.9em;
     }
- }
+}
 

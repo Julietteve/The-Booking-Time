@@ -62,8 +62,8 @@ class App extends React.Component {
         let availabilityDatesIn = [];
         let availabilityDatesOut= [];
         let availabilityFromToDate= new Date(this.state.filterBy.availabilityFrom.split("-").join(","));
-        this.dateConvert(availabilityFromToDate);
         let availabilityToToDate= new Date(this.state.filterBy.availabilityTo.split("-").join(","));
+        this.dateConvert(availabilityFromToDate);
         this.dateConvert(availabilityToToDate);
       
 
