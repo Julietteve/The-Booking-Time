@@ -17,7 +17,6 @@ body {
 
 /*Hotel*/
 
-
 .hotels{
     padding-top: 3%;
     display: flex;
@@ -230,7 +229,7 @@ option:hover{
     margin: 2px;
 }
 
-/* Responsive on mobile and lg screen*/
+/* Responsive */
 
 @media screen and (max-width: 992px) {
     .title{
